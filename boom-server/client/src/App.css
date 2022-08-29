@@ -1,0 +1,172 @@
+.App {
+  text-align: center;
+}
+
+.Header{
+  background-color: violet;
+  border-bottom-left-radius: 43%;
+  border-bottom-right-radius: 43%;
+  border-bottom: 50%;
+}
+
+.Container{
+  display: flex;
+  justify-content: center;
+}
+
+.Cell{
+ border: 1px solid grey;
+ color: whitesmoke;
+ width: 85px;
+ height: 85px;
+ background-color: rgb(18, 18, 88);
+}
+
+.Nav{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: none;
+  padding: 10px 12%;
+}
+
+.nLink{
+  display: inline-block;
+  font-weight: bolder;
+  text-decoration: none;
+  background-color:rgb(245, 196, 245);
+  list-style: none;
+  margin: 0 20px;
+  border: 2px;
+  padding: 5px;
+  border-radius: 50%;
+  margin-top: -25px;
+}
+
+.Color{
+  text-decoration: none;
+  color: violet;
+  font-weight: bold;
+}
+
+.Play{
+  text-decoration: none;
+  color: violet;
+  border-radius: 50%;
+  border-spacing: 4px;
+  font-weight: bold;
+}
+
+.Start{
+  margin-top: -26px;
+  margin-bottom: 15px;
+}
+
+.Title{
+  display: flex;
+  text-decoration: none;
+  text-shadow: 3px;
+  font-weight: bolder;
+  color: royalblue;
+  margin-top: -26px;
+  margin-left: 83px;
+  margin-bottom: 2px;
+  font-weight: bolder;
+}
+
+.Subtitle{
+  display: flex;
+  margin-top: -20px;
+  margin-left: 137px;
+  color: rebeccapurple;
+  font-weight: bold;
+}
+
+html{
+  background: lightblue;
+}
+
+.Table{
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  margin-top: -25px;
+}
+
+.How{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.Instruction{
+  display: flex;
+  justify-content: center;
+  margin-top: -20px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.To{
+  display: flex;
+  justify-content: center;
+  margin-top: -15px;
+}
+
+#Home{
+  margin-top: -15px;
+}
+
+#restart{
+  display: flex;
+}
+
+.Trav{
+  height: 250px;
+  width: 150px;
+}
+
+.Bio{
+  width: 200px
+}
+
+.Team{
+  display: flex;
+  justify-content: center;
+}
+
+.Tom{
+  height: 250px;
+  width: 200px
+}
+
+.June{
+  height: 250px;
+  width: 180px;
+  margin-left: 20px;
+}
+
+.LoginBtn{
+  text-decoration: none;
+  color: royalblue;
+  border-radius: 50%;
+}
+
+#Pass_pin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.google{
+  display: flex;
+  align-content: space-around;
+  justify-content: center;
+  padding: 3px;
+}
+
+.Logbtn{
+  color: violet;
+  font-weight: 500;
+}
