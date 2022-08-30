@@ -11,7 +11,9 @@
 
 .Container{
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .Cell{
@@ -110,7 +112,7 @@ html{
 .To{
   display: flex;
   justify-content: center;
-  margin-top: -15px;
+  margin-top: 10px;
 }
 
 #Home{
@@ -169,4 +171,16 @@ html{
 .Logbtn{
   color: violet;
   font-weight: 500;
+}
+
+.Account{
+  display: flex;
+  flex-direction: row-reverse;
+  text-decoration: none;
+  flex-direction: column-reverse;
+  margin-top: -15px;
+  padding-bottom: 8px;
+  color: rgb(245, 196, 245);
+  font-weight: bold;
+  border-radius: 50%;
 }

@@ -13,6 +13,8 @@ function Header(){
                 <li className="nLink"><NavLink className="Play" to='/play'>Play</NavLink></li>
                 <li className="nLink"><NavLink className="Color" to='/team'>Team</NavLink></li>
             </ul>
+
+            <NavLink className="Account" to='/account'>Account</NavLink>
         </div>
     )
 }
