@@ -178,7 +178,7 @@ html{
   flex-direction: row-reverse;
   text-decoration: none;
   flex-direction: column-reverse;
-  margin-top: -15px;
+  margin-top: -10px;
   padding-bottom: 8px;
   color: rgb(245, 196, 245);
   font-weight: bold;
