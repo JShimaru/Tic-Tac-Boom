@@ -6,14 +6,14 @@ const createUser = async (req,res) => {
         const salt = await bcrypt.genSalt()
         const hashedPwd = await bcrypt.hash(req.body.password, salt)
         // const hashedPin = await bcrypt.hash(req.body.sign_in_pin, salt)
-        const hashedEmail = await bcrypt.hash(req.body.email, salt)
+        // const hashedEmail = await bcrypt.hash(req.body.email, salt)
         console.log(salt)
         console.log(hashedPwd)
         // console.log(hashedPin)
-        console.log(hashedEmail)
+        // console.log(hashedEmail)
         const user = await new User({
             username: req.body.username,
-            email: hashedEmail,
+            email: req.body.email,
             password: hashedPwd
         })
         await user.save()
@@ -31,8 +31,10 @@ const login = async (req,res) => {
     try{
         if(await bcrypt.compare(req.body.password, user.password)){
             res.send('Login Successful')
+            console.log('Success')
         }else{
             res.send('Login denied')
+            console.log('Failed')
         }
     }catch(err){
         return res.status(500).json({error:err.message})

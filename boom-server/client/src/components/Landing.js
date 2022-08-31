@@ -6,8 +6,11 @@ import Team from './pages/Team'
 import Homepage from './pages/Homepage';
 import CreateUser from './pages/CreateUser';
 import Account from './pages/Account';
+import LoggedIn from './pages/LoggedIn';
+
 
 function Landing(){
+
 
     return(
         <div>
@@ -18,9 +21,9 @@ function Landing(){
                 <Route path='/play' element={<Play/>} />
                 <Route path='/team' element={<Team/>} />
                 <Route path='/account' element={<Account/>} />
-                <Route path='/account/:user' element={<Account/>} />
+                <Route path='/account/:id' element={<LoggedIn/>} />
                 <Route path='*' element={<NotFound/>} />
-            </Routes>    
+            </Routes>
         </div>
     )
 }

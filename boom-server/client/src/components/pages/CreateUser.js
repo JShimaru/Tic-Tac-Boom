@@ -1,8 +1,6 @@
-import { useState, useEffect, useRef } from "react"
+import { useState } from "react"
 import axios from 'axios'
 import apiUrl from "../../config/config"
-import GLogin from '../GLogin'
-import GLogout from '../GLogout'
 
 // const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 // const PWD_REGEX = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -70,14 +68,13 @@ function CreateUser(){
         let username = details.username
         let email = details.email
         let password = details.password
-        let sign_in_pin = details.pin
+        // let sign_in_pin = details.pin
 
         console.log(packet)
         setPacket({
             "username": username,
             "email": email,
-            "password": password,
-            "sign_in_pin": sign_in_pin
+            "password": password
         })
     }
 
@@ -93,9 +90,9 @@ function CreateUser(){
 
     return(
         <div id="CreateUser">
-            { display ? <><h2>{confirm}</h2><h4>Welcome to Tic Tac Boom, {user}!</h4></> : <><form onSubmit={(e)=>{e.preventDefault(); CreateAccount(details); sendPacket(packet)}}>
+            { display ? <><h2>{confirm}</h2><h4>Welcome to Tic Tac Boom, {user}! {<br/>} We'll email you when the full game is released!</h4></> : <><form onSubmit={(e)=>{e.preventDefault(); CreateAccount(details); sendPacket(packet)}}>
                 <div className="Inner">
-                    <h4>Create a new user account</h4>
+                    <h4>Create an account to be informed on the release!</h4>
                             {error}
                     <div className="form">
                         <input type="text" name="name" id="name" placeholder="Username" onChange={e => {setDetails({...details, username:e.target.value}); makePacket(details)}} value={details.name}/>
@@ -110,8 +107,8 @@ function CreateUser(){
                         <input type='password' name='passwordCheck' id="passwordCheck" placeholder="Confirm password" onChange={e => setDetails({...details, passwordCheck:e.target.value})} value={details.passwordCheck} minLength="6" maxLength="30"/>
                     </div>
                     <div className="form">
-                        <label htmlFor="pin">Optional-</label>
-                        <input type="tel" name="pin" id="pin" placeholder="4-6 digit pin" maxLength="6" minLength="4" onChange={e => {setDetails({...details, pin:e.target.value}); makePacket(details)}} value={details.pin}/>
+                        {/* <label htmlFor="pin">Optional-</label>
+                        <input type="tel" name="pin" id="pin" placeholder="4-6 digit pin" maxLength="6" minLength="4" onChange={e => {setDetails({...details, pin:e.target.value}); makePacket(details)}} value={details.pin}/> */}
                     </div>
                     <input type='submit' value='Create Account' className="CreateAccount"/>
                 </div>

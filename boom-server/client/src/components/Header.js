@@ -14,7 +14,7 @@ function Header(){
                 <li className="nLink"><NavLink className="Color" to='/team'>Team</NavLink></li>
             </ul>
 
-            <NavLink className="Account" to='/account'>Account</NavLink>
+            {/* <NavLink className="Account" to='/account'>Account</NavLink> */}
         </div>
     )
 }

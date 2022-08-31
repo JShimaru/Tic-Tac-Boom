@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react"
-import {useNavigate, useParams} from 'react-router-dom'
+import { useState, useEffect, useContext } from "react"
+import {useNavigate} from 'react-router-dom'
 import axios from "axios"
+import user from '../UserContext'
 import apiUrl from "../../config/config"
 
 function Login(){
@@ -9,34 +10,24 @@ function Login(){
     const [password, setPassword]=useState("")
     // const [sign_In_Pin, setSign_In_Pin]=useState("")
     const [loginData, setLoginData]=useState({username: "", password: ""})
+    const [loggedIn, setLoggedIn]=useState(false)
+    
+    const {userData, setUserData} = useContext(user)
 
 
     let navigate = useNavigate()
-
-
-    useEffect(()=>{
-        async function findUser(){
-            if(loginData.username !== ""){
-            try{
-                const response = await axios({
-                    url: `${apiUrl}/users/login`,
-                    method: 'POST',
-                    data: loginData
-                })
-            if()
-                console.log(response)
-            }catch(err){
-                console.error(err)
-            }
-        }}
-        findUser();
-    },[loginData, navigate])
 
     function handleUser(event){
         let user = event.target.value
         console.log(user)
         setUsername(user)
     }
+
+    useEffect(()=>{
+        if(loggedIn === true){
+            return navigate(`/account/${username}`)
+        }
+    },[loggedIn])
 
     function handlePwd(event){
         let pwd = event.target.value
@@ -57,10 +48,7 @@ function Login(){
         // if((password === "" && sign_In_Pin === "") || (password !== "" && sign_In_Pin !== "")){
         //     alert("Please enter only your password OR your pin!")
         // }else if(username && password){
-            let logData = {
-                username: {username},
-                password: {password}
-            }
+            let logData = {username, password}
             setLoginData(logData)
             console.log(logData)
         // }else{
@@ -71,12 +59,38 @@ function Login(){
         }
     }
 
+    async function handleLogin(loginData){
+            if(loginData.username !== "" && loginData.password !== ""){
+                setUserData({ username, password })
+            try{
+                const response = await axios({
+                    url: `${apiUrl}/users/login`,
+                    method: 'POST',
+                    data: userData
+                })
+            if(response.status(201)){
+                setLoggedIn(true)
+            }
+                console.log(response)
+            }catch(err){
+                console.error(err)
+            }    
+    }
+}
+
+    function handleCancel(){
+        setLoginData({
+            username: "",
+            password: ""
+        })
+    }
+
 
     return(
         <>
             <h1>Existing User Login</h1>
         {loginData.username !== "" ? <>
-        <h3>Logging in as: {username}</h3></> : <><div id="Login">
+        <h3>Log in as: {username}</h3><button className="Confirm" onClick={handleLogin}>confirm</button><br/><button className="Cancel" onClick={handleCancel}>cancel</button></> : <><div id="Login">
             <input type="text" onChange={handleUser} name="username" id="user" placeholder="Username" />
             </div>
         <div id="Pass_pin">
