@@ -1,10 +1,36 @@
 const User = require('../models/User')
+const bcrypt = require('bcrypt')
 
 const createUser = async (req,res) => {
     try{
-        const user = await new User(req.body)
+        const salt = await bcrypt.genSalt()
+        const hashedPwd = await bcrypt.hash(req.body.password, salt)
+        const hashedPin = await bcrypt.hash(req.body.sign_in_pin, salt)
+        const hashedEmail = await bcrypt.hash(req.body.email, salt)
+        console.log(salt)
+        console.log(hashedPwd)
+        console.log(hashedPin)
+        console.log(hashedEmail)
+        const user = await new User({
+            username: req.body.username,
+            email: hashedEmail,
+            password: hashedPwd,
+            sign_in_pin: hashedPin
+        })
         await user.save()
         return res.status(201).json({user})
+    }catch(err){
+        return res.status(500).json({error:err.message})
+    }
+}
+
+const login = async (req,res) => {
+    const user = User.find(user => user.username = req.body.username)
+    if(user == null){
+        return res.status(400).send('Cannot find user!')
+    }
+    try{
+        bcrypt.compare(req.body.password, user.password)
     }catch(err){
         return res.status(500).json({error:err.message})
     }
@@ -67,5 +93,6 @@ module.exports ={
     getAllUsers,
     userById,
     updateUser,
-    deleteUser
+    deleteUser,
+    login
 }
