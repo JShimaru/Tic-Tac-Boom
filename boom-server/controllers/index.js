@@ -5,17 +5,16 @@ const createUser = async (req,res) => {
     try{
         const salt = await bcrypt.genSalt()
         const hashedPwd = await bcrypt.hash(req.body.password, salt)
-        const hashedPin = await bcrypt.hash(req.body.sign_in_pin, salt)
+        // const hashedPin = await bcrypt.hash(req.body.sign_in_pin, salt)
         const hashedEmail = await bcrypt.hash(req.body.email, salt)
         console.log(salt)
         console.log(hashedPwd)
-        console.log(hashedPin)
+        // console.log(hashedPin)
         console.log(hashedEmail)
         const user = await new User({
             username: req.body.username,
             email: hashedEmail,
-            password: hashedPwd,
-            sign_in_pin: hashedPin || null
+            password: hashedPwd
         })
         await user.save()
         return res.status(201).json({user})

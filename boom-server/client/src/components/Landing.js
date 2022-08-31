@@ -17,7 +17,8 @@ function Landing(){
                 <Route path='/createUser' element={<CreateUser/>} />
                 <Route path='/play' element={<Play/>} />
                 <Route path='/team' element={<Team/>} />
-                <Route path='/account' element={<Account/>} state=""/>
+                <Route path='/account' element={<Account/>} />
+                <Route path='/account/:user' element={<Account/>} />
                 <Route path='*' element={<NotFound/>} />
             </Routes>    
         </div>
