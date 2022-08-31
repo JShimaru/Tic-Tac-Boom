@@ -30,7 +30,11 @@ const login = async (req,res) => {
         return res.status(400).send('Cannot find user!')
     }
     try{
-        bcrypt.compare(req.body.password, user.password)
+        if(await bcrypt.compare(req.body.password, user.password)){
+            res.send('Login Successful')
+        }else{
+            res.send('Login denied')
+        }
     }catch(err){
         return res.status(500).json({error:err.message})
     }
