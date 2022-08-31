@@ -15,7 +15,7 @@ const createUser = async (req,res) => {
             username: req.body.username,
             email: hashedEmail,
             password: hashedPwd,
-            sign_in_pin: hashedPin
+            sign_in_pin: hashedPin || null
         })
         await user.save()
         return res.status(201).json({user})
