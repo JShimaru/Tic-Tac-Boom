@@ -7,12 +7,13 @@ import apiUrl from "../../config/config"
 function Login(){
 
     const [username, setUsername]=useState("")
+    const [email, setEmail]=useState("")
     const [password, setPassword]=useState("")
     // const [sign_In_Pin, setSign_In_Pin]=useState("")
-    const [loginData, setLoginData]=useState({username: "", password: ""})
+    const [loginData, setLoginData]=useState({email: "", password: ""})
     const [loggedIn, setLoggedIn]=useState(false)
     
-    const {userData, setUserData} = useContext(user)
+    // const {userData, setUserData} = useContext(user)
 
 
     let navigate = useNavigate()
@@ -20,7 +21,7 @@ function Login(){
     function handleUser(event){
         let user = event.target.value
         console.log(user)
-        setUsername(user)
+        setEmail(user)
     }
 
     useEffect(()=>{
@@ -42,13 +43,13 @@ function Login(){
     // }
 
     function handleClick(){
-        if(!username || !password){
+        if(!email || !password){
             alert("Please enter your login information")
         }else{
         // if((password === "" && sign_In_Pin === "") || (password !== "" && sign_In_Pin !== "")){
         //     alert("Please enter only your password OR your pin!")
         // }else if(username && password){
-            let logData = {username, password}
+            let logData = {email, password}
             setLoginData(logData)
             console.log(logData)
         // }else{
@@ -60,18 +61,18 @@ function Login(){
     }
 
     async function handleLogin(loginData){
-            if(loginData.username !== "" && loginData.password !== ""){
-                setUserData({ username, password })
+            if(loginData.email !== "" && loginData.password !== ""){
+                setLoginData({ email, password })
             try{
                 const response = await axios({
                     url: `${apiUrl}/users/login`,
                     method: 'POST',
-                    data: userData
+                    data: loginData
                 })
             if(response.status(201)){
                 setLoggedIn(true)
             }
-                console.log(response)
+                //console.log(response)
             }catch(err){
                 console.error(err)
             }    
@@ -80,7 +81,7 @@ function Login(){
 
     function handleCancel(){
         setLoginData({
-            username: "",
+            email: "",
             password: ""
         })
     }
@@ -89,12 +90,17 @@ function Login(){
     return(
         <>
             <h1>Existing User Login</h1>
-        {loginData.username !== "" ? <>
-        <h3>Log in as: {username}</h3><button className="Confirm" onClick={handleLogin}>confirm</button><br/><button className="Cancel" onClick={handleCancel}>cancel</button></> : <><div id="Login">
-            <input type="text" onChange={handleUser} name="username" id="user" placeholder="Username" />
-            </div>
-        <div id="Pass_pin">
-            <input type="password" onChange={handlePwd} name="password" id="password" placeholder="password" minLength="6" maxLength="30"/></div><button className="Logbtn" onClick={handleClick}>Login</button></>}
+
+        {loginData.email ? <>
+        <h3>Log in as: {username}</h3><button className="Confirm" onClick={handleLogin}>confirm</button><br/><button className="Cancel" onClick={handleCancel}>cancel</button></> : <>
+        <div id="Login">
+            <input type="email" onChange={handleUser} name="email" id="email" placeholder="Email" />
+        </div>
+        <div id="Password">
+            <input type="password" onChange={handlePwd} name="password" id="password" placeholder="password" minLength="6" maxLength="30"/>
+        </div>
+            <button className="Logbtn" onClick={handleClick}>Login</button></>}
+
                 {/* <p>or</p>
             <input type="tel" onChange={handlePin} name="sign_in_pin" id="sign_in_pin" placeholder="pin" minLength="4" maxLength="6"/>
         </div></>} */}

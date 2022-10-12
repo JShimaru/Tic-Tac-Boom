@@ -107,6 +107,7 @@ html{
   margin-top: -20px;
   margin-left: 5px;
   margin-right: 5px;
+  margin-bottom: 10px;
 }
 
 .To{
@@ -183,4 +184,8 @@ html{
   color: rgb(245, 196, 245);
   font-weight: bold;
   border-radius: 50%;
+}
+
+.Mode{
+  margin-top: -5px
 }

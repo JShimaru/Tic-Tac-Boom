@@ -1,7 +1,10 @@
+import { useContext } from "react";
+import { currentUser } from "./UserContext";
 import { NavLink } from "react-router-dom";
 
 function Header(){
 
+    const {user, setUser} = useContext(currentUser)
 
     return(
         <div className="Header">
@@ -13,8 +16,9 @@ function Header(){
                 <li className="nLink"><NavLink className="Play" to='/play'>Play</NavLink></li>
                 <li className="nLink"><NavLink className="Color" to='/team'>Team</NavLink></li>
             </ul>
-
-            {/* <NavLink className="Account" to='/account'>Account</NavLink> */}
+            {user === null ? <><NavLink className="Account" to='/account'>Login</NavLink></> :
+            <><NavLink className="Account" to='/account/:user'>Account</NavLink>
+            <NavLink className="Account" to='/' onClick={()=> setUser(null)}>Logout</NavLink></>}
         </div>
     )
 }
