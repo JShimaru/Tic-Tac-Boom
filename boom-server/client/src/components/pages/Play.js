@@ -21,37 +21,37 @@ const Play = () => {
       [0,4,8],
       [2,4,6]
   ]
-    const freeMoves = squares.map((square, index)=> square === '' ? index : null)
-    .filter(val => val !== null)
-    
-    const lines = (a,b,c) =>{
-      return winCon.filter(squaresIndex=>{
-        const squareValues = squaresIndex.map(index => squares[index])
-        return JSON.stringify([a,b,c].sort()) === JSON.stringify(squareValues.sort())
-      })
-    }
-    // const playerVictory = lines('X', 'X', 'X').length > 0;
-    const cpuVictory = lines('O','O','O').length > 0;
-
-    // if(playerVictory){
-    //   alert("You've bested the Computer! Now play your best friend!")
+  const freeMoves = squares.map((square, index)=> square === '' ? index : null)
+  .filter(val => val !== null)
+  
+  const lines = (a,b,c) =>{
+    return winCon.filter(squaresIndex=>{
+      const squareValues = squaresIndex.map(index => squares[index])
+      return JSON.stringify([a,b,c].sort()) === JSON.stringify(squareValues.sort())
+    })
+  }
+  // const playerVictory = lines('X', 'X', 'X').length > 0;
+  const cpuVictory = lines('O','O','O').length > 0;
+  
+  // if(playerVictory){
+    //   alert("You've bested the Computer! Now try to best your friend!")
     // }
     if(cpuVictory){
       setWinner('O')
       //alert("This one goes to the CPU!")
     }
-
+    
     const cpuMove = index => {
       let newSquares = squares;
       if(index !== bombs){
-      newSquares[index] = 'O'
-      setCells(newSquares)
-      setTurn('X')
-    }else{
-      setTurn('X')
+        newSquares[index] = 'O'
+        setCells(newSquares)
+        setTurn('X')
+      }else{
+        setTurn('X')
+      }
     }
-    }
-
+    
     if(mode === false && turn === 'O' && winner === ''){
       const winninMove = lines('O', 'O', '');
       if(winninMove.length > 0){
@@ -78,42 +78,49 @@ const Play = () => {
   },[squares])
   
   const checkWinner = (squares) =>{
-      let combos = {
+    let combos = {
       across: [
-              [0,1,2],
-              [3,4,5],
-              [6,7,8]
-          ],
+        [0,1,2],
+        [3,4,5],
+        [6,7,8]
+      ],
       down: [
-              [0,3,6],
-              [1,4,7],
-              [2,5,8]
-          ],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8]
+      ],
       diag: [
-              [0,4,8],
-              [2,4,6]
-          ]
-      };
-      
+        [0,4,8],
+        [2,4,6]
+      ]
+    };
+    
     for(let combo in combos){
       combos[combo].forEach((pattern)=>{
         if(
           squares[pattern[0]] === '' ||
           squares[pattern[1]] === '' ||
           squares[pattern[2]] === ''
-        ){
-          console.log("No Winner Yet...")
-        }else if(
-          squares[pattern[0]] === squares[pattern[1]] &&
-          squares[pattern[1]] === squares[pattern[2]]        
-         ){
-          setWinner(squares[pattern[0]])
-         }
+          ){
+            console.log("No Winner Yet...")
+          }else if(
+            squares[pattern[0]] === squares[pattern[1]] &&
+            squares[pattern[1]] === squares[pattern[2]]        
+            ){
+              setWinner(squares[pattern[0]])
+            }
+          }
+          )}
         }
-    )}
-  }
-
+        
   const handleClick = (num)=>{
+    const fullBoard = squares.map((square, index)=> square === '' ? index : null)
+    .filter(val => val !== null)
+
+    if(fullBoard.length === 0){
+      alert('Full board, Please press start over? to clear board!')
+        return;
+          }
     if(winner !== ''){
       alert(`${winner} won this round, Please press play again!`)
       return;
@@ -161,8 +168,8 @@ const Play = () => {
     <div className='Container'>
         <div className='How'>
             <h4 className='To'>HOW TO PLAY:</h4>
-            <p className='Instruction'>Click a square to place your piece. Get three in a row to win. Beware of bombs that will skip your turn if you land on them!</p><br/>
-            <p className='Instruction'>Click "Two Player" button to play with a friend!</p>
+            <p className='Instruction'>Click a square to place your piece; Get three in a row to win. Beware of bombs that skip your turn, if you land on them!</p><br/>
+            <p className='Instruction'>Click "Two Player" button to play face to face!</p>
             <h5 className='Mode'><button onClick={()=>cpuOff()}>{mode ? "Single Player" : "Two Player"}</button></h5>
             <br/>
             <div className='Container'>
