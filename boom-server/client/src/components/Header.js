@@ -16,9 +16,10 @@ function Header(){
                 <li className="nLink"><NavLink className="Play" to='/play'>Play</NavLink></li>
                 <li className="nLink"><NavLink className="Color" to='/team'>Team</NavLink></li>
             </ul>
-            {/* {user === null ? <><NavLink className="Account" to='/account'>Login</NavLink></> :
-            <><NavLink className="Account" to='/account/:user'>Account</NavLink>
-            <NavLink className="Account" to='/' onClick={()=> setUser(null)}>Logout</NavLink></>} */}
+            {user === null ? <><NavLink className="Account" to='/login'>Login</NavLink></> :
+            <><NavLink className="Account" to='/account/{user}'>Account</NavLink>
+            <NavLink className="Account" to='/' onClick={()=> setUser(null)}>Logout</NavLink></>}
+            <button onClick={(e)=> setUser('Bob')}>Get Bob</button>
         </div>
     )
 }

@@ -1,19 +1,18 @@
 import { useState, useEffect, useContext } from "react"
 import {useNavigate} from 'react-router-dom'
+import { currentUser } from "../UserContext";
 import axios from "axios"
-import user from '../UserContext'
 import apiUrl from "../../config/config"
 
 function Login(){
 
-    const [username, setUsername]=useState("")
     const [email, setEmail]=useState("")
     const [password, setPassword]=useState("")
     // const [sign_In_Pin, setSign_In_Pin]=useState("")
-    const [loginData, setLoginData]=useState({email: "", password: ""})
+    const [loginData, setLoginData]=useState(JSON.stringify({email: "", password: ""}))
     const [loggedIn, setLoggedIn]=useState(false)
     
-    // const {userData, setUserData} = useContext(user)
+    const {user, setUser} = useContext(currentUser)
 
 
     let navigate = useNavigate()
@@ -26,7 +25,7 @@ function Login(){
 
     useEffect(()=>{
         if(loggedIn === true){
-            return navigate(`/account/${username}`)
+            return navigate(`/account/${user}`)
         }
     },[loggedIn])
 
@@ -62,7 +61,7 @@ function Login(){
 
     async function handleLogin(loginData){
             if(loginData.email !== "" && loginData.password !== ""){
-                setLoginData({ email, password })
+                // setLoginData({ email, password })
             try{
                 const response = await axios({
                     url: `${apiUrl}/users/login`,
@@ -72,7 +71,7 @@ function Login(){
             if(response.status(201)){
                 setLoggedIn(true)
             }
-                //console.log(response)
+                console.log(response)
             }catch(err){
                 console.error(err)
             }    
@@ -92,7 +91,7 @@ function Login(){
             <h1>Existing User Login</h1>
 
         {loginData.email ? <>
-        <h3>Log in as: {username}</h3><button className="Confirm" onClick={handleLogin}>confirm</button><br/><button className="Cancel" onClick={handleCancel}>cancel</button></> : <>
+        <h3>Log in as: {email}</h3><button className="Confirm" onClick={handleLogin}>confirm</button><br/><button className="Cancel" onClick={handleCancel}>cancel</button></> : <>
         <div id="Login">
             <input type="email" onChange={handleUser} name="email" id="email" placeholder="Email" />
         </div>

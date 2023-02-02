@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import {useState} from 'react'
+import { useEffect, useState } from 'react'
 
 const Play = () => {
   const [cells, setCells] = useState(Array(9).fill(''))
@@ -7,7 +6,6 @@ const Play = () => {
   const [bombs, setBombs] = useState(Math.floor((Math.random()*3)-2))
   const [winner, setWinner] = useState('');
   const [mode, setMode] = useState(false)
-
   let squares = [...cells]
 
   useEffect(()=>{
@@ -49,6 +47,7 @@ const Play = () => {
         setTurn('X')
       }else{
         setTurn('X')
+        alert('Boom! CPU landed on a bomb!')
       }
     }
     
@@ -167,6 +166,7 @@ const Play = () => {
   return (
     <div className='Container'>
         <div className='How'>
+            <audio id='bomb' src='' preload='auto'></audio>
             <h4 className='To'>HOW TO PLAY:</h4>
             <p className='Instruction'>Click a square to place your piece; Get three in a row to win. Beware of bombs that skip your turn, if you land on them!</p><br/>
             <p className='Instruction'>Click "Two Player" button to play face to face!</p>

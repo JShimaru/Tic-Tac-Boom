@@ -16,13 +16,14 @@ function Landing(){
         <div>
             <Routes>
                 <Route path='/' element={<Homepage/>} />
-                <Route path='/login' element={<Login/>} state="setCurrentUser"/>
+                <Route path='/login' element={<Login/>} />
                 <Route path='/createUser' element={<CreateUser/>} />
                 <Route path='/play' element={<Play/>} />
                 <Route path='/team' element={<Team/>} />
                 <Route path='/account' element={<Account/>} />
                 <Route path='/account/:id' element={<LoggedIn/>} />
                 <Route path='*' element={<NotFound/>} />
+                <Route path='/botd' element={<NotFound/>} />
             </Routes>
         </div>
     )
